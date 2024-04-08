@@ -1,11 +1,11 @@
 import boto3
 import pytest
-from moto import mock_s3
+from moto import mock_aws
 from botocore.exceptions import ParamValidationError
 from src.boto3_example import S3Example
 
 
-@mock_s3
+@mock_aws
 def test_my_model_save():
     conn = boto3.resource('s3', region_name='us-east-1')
     # We need to create the bucket since this is all in Moto's 'virtual' AWS account
@@ -19,7 +19,7 @@ def test_my_model_save():
     assert body == 'is awesome'
 
 
-@mock_s3
+@mock_aws
 def test_s3_save_failure():
     conn = boto3.resource('s3', region_name='us-east-1')
 
